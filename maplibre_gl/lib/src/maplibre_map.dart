@@ -47,6 +47,7 @@ class MapLibreMap extends StatefulWidget {
     this.onCameraTrackingChanged,
     this.onCameraIdle,
     this.onMapIdle,
+    this.onDrag,
     this.annotationOrder = const [
       AnnotationType.line,
       AnnotationType.symbol,
@@ -218,7 +219,7 @@ class MapLibreMap extends StatefulWidget {
   /// While the `myLocationEnabled` property is set to `true`, this method is
   /// called whenever a new location update is received by the map view.
   final OnUserLocationUpdated? onUserLocationUpdated;
-
+final void Function()? onDrag;
   /// Called when the map's camera no longer follows the physical device location, e.g. because the user moved the map
   final OnCameraTrackingDismissedCallback? onCameraTrackingDismissed;
 
@@ -324,6 +325,7 @@ class _MapLibreMapState extends State<MapLibreMap> {
       onCameraTrackingChanged: widget.onCameraTrackingChanged,
       onCameraIdle: widget.onCameraIdle,
       onMapIdle: widget.onMapIdle,
+      onDrag: widget.onDrag,
       annotationOrder: widget.annotationOrder,
       annotationConsumeTapEvents: widget.annotationConsumeTapEvents,
     );

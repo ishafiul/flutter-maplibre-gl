@@ -85,6 +85,7 @@ class MapLibreMapController extends ChangeNotifier {
     this.onCameraTrackingDismissed,
     this.onCameraTrackingChanged,
     this.onMapIdle,
+    this.onDrag,
     this.onUserLocationUpdated,
     this.onCameraIdle,
   }) : _maplibrePlatform = maplibrePlatform {
@@ -172,6 +173,9 @@ class MapLibreMapController extends ChangeNotifier {
     _maplibrePlatform.onMapIdlePlatform.add((_) {
       onMapIdle?.call();
     });
+    _maplibrePlatform.onFeatureDraggedPlatform.add((_) {
+      onDrag?.call();
+    });
     _maplibrePlatform.onUserLocationUpdatedPlatform.add((location) {
       onUserLocationUpdated?.call(location);
     });
@@ -194,6 +198,7 @@ class MapLibreMapController extends ChangeNotifier {
   final OnCameraIdleCallback? onCameraIdle;
 
   final OnMapIdleCallback? onMapIdle;
+  final void Function()? onDrag;
 
   /// Callbacks to receive tap events for symbols placed on this map.
   final ArgumentCallbacks<Symbol> onSymbolTapped = ArgumentCallbacks<Symbol>();
